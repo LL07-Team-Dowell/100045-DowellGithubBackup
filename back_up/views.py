@@ -27,12 +27,12 @@ def repositoryClone(request):
         repository_name = "100058-dowelleditor_backend"
         repository_url= "https://github.com/LL04-Finance-Dowell/100058-dowelleditor_backend.git"
         function_number="100058"
-        path="/home/100090/100090-dowelltest/file"
+        path="/home/100045/Repository"
 
         os.chdir(path)
         os.system(f'git clone {repository_url}')
         filename ="post-merge"
-        paths=f"/home/100090/100090-dowelltest/file/{repository_name}/.git/hooks"
+        paths=f"/home/100045/Repository{repository_name}/.git/hooks"
         completepath = os.path.join(paths, filename)
         post_merge = open(completepath, "w")
         line=["!/bin/sh \n","touch /var/www/100045_pythonanywhere_com_wsgi.py \n"]
@@ -65,7 +65,7 @@ def repositoryClone(request):
 @csrf_exempt
 def webhookss(request , repository_name):
     if request.method == 'POST':
-        repo = git.Repo(f'/home/100090/100090-dowelltest/file/{repository_name}/.git')
+        repo = git.Repo(f'/home/100045/Repository/{repository_name}/.git')
         origin = repo.remotes.origin
         origin.pull()
 
@@ -77,9 +77,9 @@ def webhookss(request , repository_name):
         zip_file_name = f'{repository_name} {eventId}.zip'
         time.sleep(10)
 
-        pathname= f'/home/100090/100090-dowelltest/file2/{zip_file_name}'
+        pathname= f'/home/100045/Zip files/{zip_file_name}'
         zipf = zipfile.ZipFile(pathname, 'w', zipfile.ZIP_DEFLATED)
-        zipdir(f'/home/100090/100090-dowelltest/file/{repository_name}', zipf)
+        zipdir(f'/home/100045/Repository/{repository_name}', zipf)
         zipf.close()
         time.sleep(10)
 
